@@ -4507,6 +4507,13 @@ react-deep-force-update@^1.0.0:
   resolved "http://registry.npm.taobao.org/react-deep-force-update/download/react-deep-force-update-1.1.2.tgz#3d2ae45c2c9040cbb1772be52f8ea1ade6ca2ee1"
   integrity sha1-PSrkXCyQQMuxdyvlL46hrebKLuE=
 
+react-native-easy-toast@^1.1.0:
+  version "1.1.0"
+  resolved "http://registry.npm.taobao.org/react-native-easy-toast/download/react-native-easy-toast-1.1.0.tgz#7d3a34ed298d32c4827b8d43ddfab6a71b98a2e3"
+  integrity sha1-fTo07SmNMsSCe41D3fq2pxuYouM=
+  dependencies:
+    prop-types "^15.5.10"
+
 react-native-tab-navigator@^0.3.4:
   version "0.3.4"
   resolved "http://registry.npm.taobao.org/react-native-tab-navigator/download/react-native-tab-navigator-0.3.4.tgz#54a18f1ad06a09d4a0de81ff00416bc1b760c960"

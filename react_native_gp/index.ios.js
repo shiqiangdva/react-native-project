@@ -11,11 +11,13 @@ import {
     Text,
     Navigator,
     Image,
-    View
+    View,
 } from 'react-native';
 // 引入tab组件
 import TabNavigator from 'react-native-tab-navigator';
+import ListViewTest from './ListViewTest';
 import Boy from './Boy';
+
 
 export default class react_native_gp extends Component {
 
@@ -23,7 +25,7 @@ export default class react_native_gp extends Component {
         super(props);
 
         this.state = {
-            selectedTab: 'tb_popular'
+            selectedTab: 'tb_popular',
         }
     }
 
@@ -77,22 +79,27 @@ export default class react_native_gp extends Component {
                     {/*</TabNavigator.Item>*/}
                 {/*</TabNavigator>*/}
 
-                <Navigator
-                    initialRoute={{
-                        component: Boy
-                    }}
-                    renderScene={(route, navigator) => {
-                        /**
-                         * 这里注意!!!
-                         * Component是从route.component中取出来的 不是react中的
-                         * 不然会报错:inst.render is not a function
-                         */
-                        let Component = route.component;
-                        return <Component navigator={navigator} {...route.params}/>
-                    }}
-                >
 
-                </Navigator>
+
+
+                {/*<Navigator*/}
+                    {/*initialRoute={{*/}
+                        {/*component: Boy*/}
+                    {/*}}*/}
+                    {/*renderScene={(route, navigator) => {*/}
+                        {/**/}
+                        {/*// 这里注意!!!Component是从route.component中取出来的 不是react中的*/}
+                        {/*// 不然会报错:inst.render is not a function*/}
+                        {/**/}
+                        {/*let Component = route.component;*/}
+                        {/*return <Component navigator={navigator} {...route.params}/>*/}
+                    {/*}}*/}
+                {/*>*/}
+                {/*</Navigator>*/}
+
+
+
+                <ListViewTest/>
             </View>
         );
     }
