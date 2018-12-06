@@ -17,6 +17,7 @@ import {
 import TabNavigator from 'react-native-tab-navigator';
 import ListViewTest from './ListViewTest';
 import Boy from './Boy';
+import FetchTest from './FetchTest';
 
 
 export default class react_native_gp extends Component {
@@ -99,7 +100,14 @@ export default class react_native_gp extends Component {
 
 
 
-                <ListViewTest/>
+
+                {/*<ListViewTest/>*/}
+
+
+
+
+                <FetchTest/>
+
             </View>
         );
     }

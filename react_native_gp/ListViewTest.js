@@ -78,7 +78,7 @@ export default class ListViewTest extends Component {
         this.state = {
             dataSource: ds.cloneWithRows(data.result),
             isLoading: true
-        }
+        };
 
         this.onLoad();
     }
