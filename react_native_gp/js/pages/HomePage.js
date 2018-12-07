@@ -15,6 +15,7 @@ import {
 // 引入tab组件
 import TabNavigator from 'react-native-tab-navigator';
 import PopularPage from './PopularPage';
+import AsyncStorageTest from "../../AsyncStorageTest";
 
 
 export default class HomePage extends Component {
@@ -30,35 +31,37 @@ export default class HomePage extends Component {
     render() {
         return (
             <View style={styles.container}>
-                
+
                 <TabNavigator>
                     <TabNavigator.Item
                         selected={this.state.selectedTab === 'tb_popular'}
                         selectedTitleStyle={{color: '#2196F3'}}
                         title="最热"
-                        renderIcon={() => <Image style={styles.image} source={require('../../res/image/ic_polular.png')}/>}
+                        renderIcon={() => <Image style={styles.image}
+                                                 source={require('../../res/image/ic_polular.png')}/>}
                         renderSelectedIcon={() => <Image style={[styles.image, {tintColor: '#2196F3'}]}
                                                          source={require('../../res/image/ic_polular.png')}/>}
                         onPress={() => this.setState({selectedTab: 'tb_popular'})}>
-                            <PopularPage/>
+                        <PopularPage/>
                     </TabNavigator.Item>
                     <TabNavigator.Item
                         selected={this.state.selectedTab === 'tb_trending'}
                         selectedTitleStyle={{color: 'yellow'}}
                         title="趋势"
-                        renderIcon={() => <Image style={styles.image} source={require('../../res/image/ic_trending.png')}/>}
+                        renderIcon={() => <Image style={styles.image}
+                                                 source={require('../../res/image/ic_trending.png')}/>}
                         renderSelectedIcon={() => <Image style={[styles.image, {tintColor: 'yellow'}]}
                                                          source={require('../../res/image/ic_trending.png')}/>}
                         // renderBadge={() => <CustomBadgeView/>}
                         onPress={() => this.setState({selectedTab: 'tb_trending'})}>
-                        {/*{profileView}*/}
-                        <View style={styles.page2}></View>
+                        <AsyncStorageTest/>
                     </TabNavigator.Item>
                     <TabNavigator.Item
                         selected={this.state.selectedTab === 'tb_favorite'}
                         selectedTitleStyle={{color: 'blue'}}
                         title="收藏"
-                        renderIcon={() => <Image style={styles.image} source={require('../../res/image/ic_favorite.png')}/>}
+                        renderIcon={() => <Image style={styles.image}
+                                                 source={require('../../res/image/ic_favorite.png')}/>}
                         renderSelectedIcon={() => <Image style={[styles.image, {tintColor: 'blue'}]}
                                                          source={require('../../res/image/ic_favorite.png')}/>}
                         onPress={() => this.setState({selectedTab: 'tb_favorite'})}>
