@@ -14,6 +14,7 @@ import {
 } from 'react-native';
 // 引入tab组件
 import TabNavigator from 'react-native-tab-navigator';
+import PopularPage from './PopularPage';
 
 
 export default class HomePage extends Component {
@@ -39,8 +40,7 @@ export default class HomePage extends Component {
                         renderSelectedIcon={() => <Image style={[styles.image, {tintColor: 'red'}]}
                                                          source={require('../../res/image/ic_polular.png')}/>}
                         onPress={() => this.setState({selectedTab: 'tb_popular'})}>
-                        {/*{homeView}*/}
-                        <View style={styles.page1}></View>
+                            <PopularPage/>
                     </TabNavigator.Item>
                     <TabNavigator.Item
                         selected={this.state.selectedTab === 'tb_trending'}
