@@ -16,6 +16,7 @@ import {
 import TabNavigator from 'react-native-tab-navigator';
 import PopularPage from './PopularPage';
 import AsyncStorageTest from "../../AsyncStorageTest";
+import MyPage from "./my/MyPage";
 
 
 export default class HomePage extends Component {
@@ -77,8 +78,7 @@ export default class HomePage extends Component {
                                                          source={require('../../res/image/ic_my.png')}/>}
                         // renderBadge={() => <CustomBadgeView/>}
                         onPress={() => this.setState({selectedTab: 'tb_my'})}>
-                        {/*{profileView}*/}
-                        <View style={styles.page4}></View>
+                        <MyPage {...this.props}/>
                     </TabNavigator.Item>
                 </TabNavigator>
 

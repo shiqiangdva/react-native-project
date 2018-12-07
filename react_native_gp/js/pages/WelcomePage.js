@@ -24,13 +24,22 @@ export default class WelcomePage extends Component {
 
     render() {
         return(
-            <View>
+            <View style={styles.container}>
                 <NavigationBar
                     title={'欢迎'}
                 />
-                <Text>来啦~老弟~</Text>
+                <Text style={styles.tips}>来啦~老弟~</Text>
             </View>
         )
     }
 
 }
+
+const styles = StyleSheet.create({
+    container: {
+        flex:1
+    },
+    tips: {
+        fontSize: 29
+    }
+});
