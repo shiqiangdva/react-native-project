@@ -3,11 +3,13 @@ import {
     View,
     StyleSheet,
     Text,
-    TextInput
+    ListView,
+    RefreshControl
 } from 'react-native';
 import NavigationBar from '../common/NavigationBar';
 import DataRepository from '../expand/dao/DataRepository';
-// import ScrollableTabView, {ScrollableTabBar} from 'react-native-scrollable-tab-view';
+import ScrollableTabView, {ScrollableTabBar} from 'react-native-scrollable-tab-view';
+import RepositoryCell from '../common/RepositoryCell';
 
 const URL = 'https://api.github.com/search/repositories?q=';
 const QUERY_STR = '&sort=stars';
@@ -16,10 +18,48 @@ export default class PopularPage extends Component {
 
     constructor(props){
         super(props);
+    }
+
+    render() {
+        return(
+            <View style={{flex:1}}>
+                <NavigationBar
+                    title={'最热'}
+                    statusBar={{
+                        backgroundColor: '#2196F3'
+                    }}
+                />
+                <ScrollableTabView
+                    tabBarBackgroundColor={"#2196F3"}
+                    tabBarActiveTextColor={"mintcream"}
+                    tabBarInactiveTextColor={"white"}
+                    tabBarUnderlineStyle={{backgroundColor:"#e7e7e7",height:2}}
+                    renderTabBar={()=><ScrollableTabBar/>}
+                >
+                    <PopularTab tabLabel={"java"}>JAVA</PopularTab>
+                    <PopularTab tabLabel={"ios"}>IOS</PopularTab>
+                    <PopularTab tabLabel={"android"}>Android</PopularTab>
+                    <PopularTab tabLabel={"JavaScript"}>js</PopularTab>
+                </ScrollableTabView>
+            </View>
+        )
+    }
+
+}
+
+class PopularTab extends Component{
+    constructor(props){
+        super(props);
         this.dataRepository = new DataRepository();
         this.state={
-            result: ''
+            result: '',
+            dataSource: new ListView.DataSource({rowHasChanged:(r1,r2)=>r1 !== r2}),
+            isLoading: false
         }
+    }
+
+    componentDidMount() {
+        this.onLoad();
     }
 
     /**
@@ -27,58 +67,55 @@ export default class PopularPage extends Component {
      * @param key
      * @returns {string}
      */
-    genUrl(key) {
-        return URL + key + QUERY_STR;
+    genUrl() {
+        return URL + this.props.tabLabel + QUERY_STR;
     }
 
     /**
      * 网络请求
      */
     onLoad() {
-        let url = this.genUrl(this.text);
-        console.log("url--->" + url);
+        this.setState({
+            isLoading: true
+        });
+        let url = this.genUrl();
+        console.log("---url---:" + url);
         this.dataRepository.fetchNetRepository(url)
             .then(result=>{
-                console.log("result--->" + JSON.stringify(result));
+                console.log("---result---:" + JSON.stringify(result));
                 this.setState({
-                    result: JSON.stringify(result)
+                    // result: JSON.stringify(result)
+                    dataSource:this.state.dataSource.cloneWithRows(result.items),
+                    isLoading: false
                 })
             })
             .catch(error=>{
-                console.log("error--->" + JSON.stringify(error));
                 this.setState({
                     result: JSON.stringify(error)
                 })
             })
     }
 
+    renderRow(data) {
+        return <RepositoryCell data={data}/>
+    }
+
     render() {
-        return(
-            <View>
-                <NavigationBar
-                    title={'最热'}
-                />
-                <Text
-                    onPress={()=>{
-                        this.onLoad()
-                    }}
-                    style={styles.tip}>获取数据</Text>
-                <TextInput
-                    style={{height:30,borderWidth:1}}
-                    onChangeText={text=>this.text = text}
-                />
-                <Text style={{height:500}}>{this.state.result}</Text>
-            </View>
-        )
+        return <View style={{flex:1}}>
+            <ListView
+                dataSource={this.state.dataSource}
+                renderRow={(data)=>this.renderRow(data)}
+                refreshControl={
+                    <RefreshControl
+                        refreshing={this.state.isLoading}
+                        onRefresh={()=>this.onLoad()}
+                        colors={['#2196F3']}
+                        tintColor={'#2196F3'}
+                        title={'loading...'}
+                        titleColor={'#2196F3'}
+                    />
+                }
+            />
+        </View>
     }
-
 }
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-    },
-    tip: {
-        fontSize: 29
-    }
-});
