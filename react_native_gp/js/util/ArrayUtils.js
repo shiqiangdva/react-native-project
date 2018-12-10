@@ -12,4 +12,34 @@ export default class ArrayUtils{
         }
         array.push(item);
     }
+
+    /***
+     * 克隆一个数组
+     * @param form
+     * @returns {Array}
+     */
+    static clone(form) {
+        if (!form) return [];
+        let newArray=[];
+        for (let i = 0, len = form.length; i < len; i++) {
+            newArray[i] = form[i];
+        }
+        return newArray;
+    }
+
+    /***
+     * 判断两个数组元素是否相等
+     * @param arr1
+     * @param arr2
+     * @returns {boolean}
+     */
+    static isEqual(arr1, arr2) {
+        if (!(arr1&&arr2)) return false;
+        if (arr1.length !== arr2.length) return false;
+        for (let i = 0, l = arr2.length; i < l; i++) {
+            if (arr1[i] !== arr2[i]) return false;
+        }
+        return true;
+    }
+
 }

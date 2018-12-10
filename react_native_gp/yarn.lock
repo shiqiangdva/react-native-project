@@ -4533,6 +4533,13 @@ react-native-scrollable-tab-view@0.7.0:
   dependencies:
     react-timer-mixin "^0.13.3"
 
+react-native-sortable-listview@0.1.1:
+  version "0.1.1"
+  resolved "http://registry.npm.taobao.org/react-native-sortable-listview/download/react-native-sortable-listview-0.1.1.tgz#04d96d62f7648da200b6c04b12ef355aedbd3895"
+  integrity sha1-BNltYvdkjaIAtsBLEu81Wu29OJU=
+  dependencies:
+    react-timer-mixin "^0.13.3"
+
 react-native-tab-navigator@^0.3.4:
   version "0.3.4"
   resolved "http://registry.npm.taobao.org/react-native-tab-navigator/download/react-native-tab-navigator-0.3.4.tgz#54a18f1ad06a09d4a0de81ff00416bc1b760c960"
