@@ -18,6 +18,11 @@
     esutils "^2.0.2"
     js-tokens "^4.0.0"
 
+GitHubTrending@^2.0.0:
+  version "2.0.0"
+  resolved "http://registry.npm.taobao.org/GitHubTrending/download/GitHubTrending-2.0.0.tgz#8a5176b9b4c3b8a42e930e384a6f8cba2331e0e1"
+  integrity sha1-ilF2ubTDuKQukw44Sm+MuiMx4OE=
+
 abab@^2.0.0:
   version "2.0.0"
   resolved "http://registry.npm.taobao.org/abab/download/abab-2.0.0.tgz#aba0ab4c5eee2d4c79d3487d85450fb2376ebb0f"
@@ -4525,6 +4530,11 @@ react-native-easy-toast@^1.1.0:
   integrity sha1-fTo07SmNMsSCe41D3fq2pxuYouM=
   dependencies:
     prop-types "^15.5.10"
+
+react-native-htmlview@^0.5.0:
+  version "0.5.0"
+  resolved "http://registry.npm.taobao.org/react-native-htmlview/download/react-native-htmlview-0.5.0.tgz#1f5fa3396259c1ae031804bf2589f6311e54c0a7"
+  integrity sha1-H1+jOWJZwa4DGAS/JYn2MR5UwKc=
 
 react-native-scrollable-tab-view@0.7.0:
   version "0.7.0"

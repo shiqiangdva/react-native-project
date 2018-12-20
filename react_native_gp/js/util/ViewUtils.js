@@ -1,23 +1,43 @@
+'use strict';
+
+import React  from 'react';
 import {
-    View,
+    TouchableHighlight,
+    Image,
+    TouchableOpacity,
     StyleSheet,
     Text,
-    Image,
-    TouchableOpacity
+    View,
 } from 'react-native';
-import React from "react";
 
+export default class ViewUtils {
 
-export default class ViewUtils{
-    static getLeftButton(callback) {
+    static getLeftButton(callBack) {
         return <TouchableOpacity
             style={{padding: 8}}
-            onPress={callback}
-        >
+            onPress={callBack}>
             <Image
-                style={{width: 26,height:26,tintColor:'white'}}
-                source={require('../../res/image/ic_arrow_back_white_36pt.png')}
-            />
+                style={{width: 26, height: 26,}}
+                source={require('../../res/image/ic_arrow_back_white_36pt.png')}/>
+        </TouchableOpacity>
+    }
+    static getRightButton(title,callBack){
+        return <TouchableOpacity
+            style={{alignItems: 'center',}}
+            onPress={callBack}>
+            <View style={{marginRight:10}}>
+                <Text style={{fontSize: 20,color: '#FFFFFF',}}>{title}</Text>
+            </View>
         </TouchableOpacity>
     }
 }
+
+const styles = StyleSheet.create({
+    setting_item_container: {
+        backgroundColor: 'white',
+        padding: 10, height: 60,
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        flexDirection: 'row'
+    },
+})

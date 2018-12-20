@@ -1,9 +1,3 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- * @flow
- */
-
 import React, {Component} from 'react';
 import {
     StyleSheet,
@@ -11,77 +5,61 @@ import {
     Navigator,
     Image,
     View,
+    DeviceEventEmitter
 } from 'react-native';
-// 引入tab组件
 import TabNavigator from 'react-native-tab-navigator';
 import PopularPage from './PopularPage';
-import AsyncStorageTest from "../../AsyncStorageTest";
-import MyPage from "./my/MyPage";
-
+import TrendingPage from './TrendingPage';
+import FavoritePage from './FavoritePage';
+import MyPage from './my/MyPage';
+import Toast, {DURATION} from 'react-native-easy-toast';
 
 export default class HomePage extends Component {
-
     constructor(props) {
         super(props);
-
         this.state = {
-            selectedTab: 'tb_popular',
+            selectedTab: 'tb_popular'
         }
+    }
+
+    componentDidMount() {
+        this.listener = DeviceEventEmitter.addListener('showToast', (text) => {
+            this.toast.show(text, DURATION.LENGTH_SHORT);
+        });
+    }
+
+    componentWillUnmount() {
+        if (this.listener) {
+            this.listener.remove();
+        }
+    }
+
+    _renderTab(Component, selectedTab, title, renderIcon) {
+        return (
+            <TabNavigator.Item
+                selected={this.state.selectedTab === selectedTab}
+                selectedTitleStyle={{color: '#2196F3'}}
+                title={title}
+                renderIcon={() => <Image style={styles.image}
+                                         source={renderIcon}/>}
+                renderSelectedIcon={() => <Image style={[styles.image, {tintColor: '#2196F3'}]}
+                                                 source={renderIcon}/>}
+                onPress={() => this.setState({selectedTab: selectedTab})}>
+                <Component {...this.props}/>
+            </TabNavigator.Item>
+        )
     }
 
     render() {
         return (
             <View style={styles.container}>
-
                 <TabNavigator>
-                    <TabNavigator.Item
-                        selected={this.state.selectedTab === 'tb_popular'}
-                        selectedTitleStyle={{color: '#2196F3'}}
-                        title="最热"
-                        renderIcon={() => <Image style={styles.image}
-                                                 source={require('../../res/image/ic_polular.png')}/>}
-                        renderSelectedIcon={() => <Image style={[styles.image, {tintColor: '#2196F3'}]}
-                                                         source={require('../../res/image/ic_polular.png')}/>}
-                        onPress={() => this.setState({selectedTab: 'tb_popular'})}>
-                        <PopularPage/>
-                    </TabNavigator.Item>
-                    <TabNavigator.Item
-                        selected={this.state.selectedTab === 'tb_trending'}
-                        selectedTitleStyle={{color: 'yellow'}}
-                        title="趋势"
-                        renderIcon={() => <Image style={styles.image}
-                                                 source={require('../../res/image/ic_trending.png')}/>}
-                        renderSelectedIcon={() => <Image style={[styles.image, {tintColor: 'yellow'}]}
-                                                         source={require('../../res/image/ic_trending.png')}/>}
-                        // renderBadge={() => <CustomBadgeView/>}
-                        onPress={() => this.setState({selectedTab: 'tb_trending'})}>
-                        <AsyncStorageTest/>
-                    </TabNavigator.Item>
-                    <TabNavigator.Item
-                        selected={this.state.selectedTab === 'tb_favorite'}
-                        selectedTitleStyle={{color: 'blue'}}
-                        title="收藏"
-                        renderIcon={() => <Image style={styles.image}
-                                                 source={require('../../res/image/ic_favorite.png')}/>}
-                        renderSelectedIcon={() => <Image style={[styles.image, {tintColor: 'blue'}]}
-                                                         source={require('../../res/image/ic_favorite.png')}/>}
-                        onPress={() => this.setState({selectedTab: 'tb_favorite'})}>
-                        {/*{homeView}*/}
-                        <View style={styles.page3}></View>
-                    </TabNavigator.Item>
-                    <TabNavigator.Item
-                        selected={this.state.selectedTab === 'tb_my'}
-                        selectedTitleStyle={{color: 'pink'}}
-                        title="我的"
-                        renderIcon={() => <Image style={styles.image} source={require('../../res/image/ic_my.png')}/>}
-                        renderSelectedIcon={() => <Image style={[styles.image, {tintColor: 'pink'}]}
-                                                         source={require('../../res/image/ic_my.png')}/>}
-                        // renderBadge={() => <CustomBadgeView/>}
-                        onPress={() => this.setState({selectedTab: 'tb_my'})}>
-                        <MyPage {...this.props}/>
-                    </TabNavigator.Item>
+                    {this._renderTab(PopularPage, 'tb_popular', '最热', require('../../res/image/ic_polular.png'))}
+                    {this._renderTab(TrendingPage, 'tb_trending', '趋势', require('../../res/image/ic_trending.png'))}
+                    {this._renderTab(FavoritePage, 'tb_favorite', '收藏', require('../../res/image/ic_favorite.png'))}
+                    {this._renderTab(MyPage, 'tb_my', '我的', require('../../res/image/ic_my.png'))}
                 </TabNavigator>
-
+                <Toast ref={(toast) => this.toast = toast}/>
             </View>
         );
     }
@@ -90,26 +68,10 @@ export default class HomePage extends Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#F5FCFF',
-    },
-    page1: {
-        flex: 1,
-        backgroundColor: 'red'
-    },
-    page2: {
-        flex: 1,
-        backgroundColor: 'yellow'
-    },
-    page3: {
-        flex: 1,
-        backgroundColor: 'blue'
-    },
-    page4: {
-        flex: 1,
-        backgroundColor: 'pink'
     },
     image: {
-        width: 22,
-        height: 22
+        height: 26,
+        width: 26,
     }
 });
+

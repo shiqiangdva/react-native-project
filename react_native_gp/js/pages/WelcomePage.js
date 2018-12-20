@@ -3,41 +3,42 @@ import {
     View,
     StyleSheet,
     Text,
-    Navigator
 } from 'react-native';
 import NavigationBar from '../common/NavigationBar';
 import HomePage from './HomePage';
 
 export default class WelcomePage extends Component {
+    constructor(props) {
+        super(props);
+    }
 
     componentDidMount() {
-        setTimeout(()=>{
-            this.timer = this.props.navigator.resetTo({
-                component: HomePage
-            })
-        },2000);
+        this.timer = setTimeout(() => {
+            this.props.navigator.resetTo({
+                component: HomePage,
+            });
+        }, 2000);
     }
 
     componentWillUnmount() {
-        this.timer && clearTimeout(this.timer)
+        this.timer && clearTimeout(this.timer);
     }
 
     render() {
-        return(
+        return (
             <View style={styles.container}>
                 <NavigationBar
-                    title={'欢迎'}
+                    title='欢迎'
+                    style={{backgroundColor: '#6495ED'}}
                 />
-                <Text style={styles.tips}>来啦~老弟~</Text>
-            </View>
-        )
+                <Text style={styles.tips}>欢迎</Text>
+            </View>)
     }
-
 }
-
 const styles = StyleSheet.create({
     container: {
-        flex:1
+        flex: 1,
+
     },
     tips: {
         fontSize: 29
