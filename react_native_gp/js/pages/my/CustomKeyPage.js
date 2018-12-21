@@ -23,7 +23,7 @@ export default class CustomKeyPage extends Component {
     constructor(props) {
         super(props);
         this.changeValues = [];
-        this.isRemoveKey=this.props.isRemoveKey?true:false;
+        this.isRemoveKey = this.props.isRemoveKey ? true : false;
         this.state = {
             dataArray: []
         }
@@ -35,17 +35,17 @@ export default class CustomKeyPage extends Component {
     }
 
     loadData() {
-        this.languageDao.fetch().then((data)=> {
+        this.languageDao.fetch().then((data) => {
             this.setState({
                 dataArray: data
             })
-        }).catch((error)=> {
+        }).catch((error) => {
             console.log(error);
         });
     }
 
     onClick(data) {
-        if(!this.isRemoveKey)data.checked = !data.checked;
+        if (!this.isRemoveKey) data.checked = !data.checked;
         ArrayUtils.updateArray(this.changeValues, data)
     }
 
@@ -54,9 +54,9 @@ export default class CustomKeyPage extends Component {
             this.props.navigator.pop();
             return;
         }
-        if(this.isRemoveKey){
-            for(let i=0,l=this.changeValues.length;i<l;i++){
-                ArrayUtils.remove(this.state.dataArray,this.changeValues[i]);
+        if (this.isRemoveKey) {
+            for (let i = 0, l = this.changeValues.length; i < l; i++) {
+                ArrayUtils.remove(this.state.dataArray, this.changeValues[i]);
             }
         }
         this.languageDao.save(this.state.dataArray);
@@ -86,7 +86,7 @@ export default class CustomKeyPage extends Component {
     }
 
     renderView() {
-        if (!this.state.dataArray || this.state.dataArray.length === 0)return;
+        if (!this.state.dataArray || this.state.dataArray.length === 0) return;
         var len = this.state.dataArray.length;
         var views = [];
         for (var i = 0, l = len - 2; i < l; i += 2) {
@@ -118,7 +118,7 @@ export default class CustomKeyPage extends Component {
         return (
             <CheckBox
                 style={{flex: 1, padding: 10}}
-                onClick={()=>this.onClick(data)}
+                onClick={() => this.onClick(data)}
                 isChecked={isChecked}
                 leftText={leftText}
                 checkedImage={<Image source={require('../../pages/my/img/ic_check_box.png')}
@@ -129,15 +129,15 @@ export default class CustomKeyPage extends Component {
     }
 
     render() {
-        let rightButtonTitle=this.isRemoveKey? '移除':'保存';
-        let title=this.isRemoveKey? '标签移除':'自定义标签';
-        title=this.props.flag=FLAG_LANGUAGE.flag_language?'自定义语言':title;
+        let rightButtonTitle = this.isRemoveKey ? '移除' : '保存';
+        let title = this.isRemoveKey ? '标签移除' : '自定义标签';
+        title = this.props.flag === FLAG_LANGUAGE.flag_language ? '自定义语言' : title;
         let navigationBar =
             <NavigationBar
                 title={title}
-                leftButton={ViewUtils.getLeftButton(()=>this.onBack())}
+                leftButton={ViewUtils.getLeftButton(() => this.onBack())}
                 style={{backgroundColor: '#2196F3'}}
-                rightButton={ViewUtils.getRightButton(rightButtonTitle,()=>this.onSave())}/>;
+                rightButton={ViewUtils.getRightButton(rightButtonTitle, () => this.onSave())}/>;
         return (
             <View style={styles.container}>
                 {navigationBar}

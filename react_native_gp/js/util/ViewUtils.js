@@ -1,6 +1,6 @@
 'use strict';
 
-import React  from 'react';
+import React from 'react';
 import {
     TouchableHighlight,
     Image,
@@ -12,6 +12,43 @@ import {
 
 export default class ViewUtils {
 
+    /**
+     * 获取设置页的item
+     * @param callback 单击item的回调函数
+     * @param icon 左侧图标
+     * @param text 显示文字
+     * @param tintStyle 图标着色
+     * @param expandableIco 右侧图标
+     */
+    static getSettingItem(callback, icon, text, tintStyle, expandableIco) {
+        return (
+            <TouchableHighlight
+                onPress={callback}
+            >
+                <View style={styles.setting_item_container}>
+                    <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                        <Image
+                            source={icon}
+                            resizeMode='stretch'
+                            style={[
+                                {width: 16, height: 16, marginRight: 10},
+                                tintStyle
+                            ]}
+                        />
+                        <Text>{text}</Text>
+                    </View>
+                    <Image
+                        source={expandableIco?expandableIco:require('../../res/image/ic_tiaozhuan.png')}
+                        style={[
+                            {marginRight: 10, height: 22, width: 22},
+                            {tintColor: '#2196F3'}
+                        ]}
+                    />
+                </View>
+            </TouchableHighlight>
+        )
+    }
+
     static getLeftButton(callBack) {
         return <TouchableOpacity
             style={{padding: 8}}
@@ -21,12 +58,13 @@ export default class ViewUtils {
                 source={require('../../res/image/ic_arrow_back_white_36pt.png')}/>
         </TouchableOpacity>
     }
-    static getRightButton(title,callBack){
+
+    static getRightButton(title, callBack) {
         return <TouchableOpacity
             style={{alignItems: 'center',}}
             onPress={callBack}>
-            <View style={{marginRight:10}}>
-                <Text style={{fontSize: 20,color: '#FFFFFF',}}>{title}</Text>
+            <View style={{marginRight: 10}}>
+                <Text style={{fontSize: 20, color: '#FFFFFF',}}>{title}</Text>
             </View>
         </TouchableOpacity>
     }
@@ -39,5 +77,5 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'space-between',
         flexDirection: 'row'
-    },
-})
+    }
+});
