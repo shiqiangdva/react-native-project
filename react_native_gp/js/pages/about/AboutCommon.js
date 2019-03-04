@@ -84,7 +84,7 @@ export default class AboutCommon {
      * 创建项目视图   mmm
      * @param projectModels
      * @return {*}
-     * xxxxx
+     * xxxxxooooo
      */
     renderRepository(projectModels) {
         if (!projectModels || projectModels.length === 0)return null;
